@@ -72,15 +72,22 @@ int getDistance() {
 void loop() {
 
   distance = getDistance();
-
+  if(distance != 1193) 
+  {
   // LCD display
   lcd.setCursor(0,0);
   lcd.print("Dist: ");
   lcd.print(distance);
   lcd.print(" cm   ");
-
+  }
+  else 
+  {
+  lcd.setCursor(0,0);
+  lcd.print("Out Of Range");  
+  }
+  delay (200);
   // ====== Safety ======
-  if(distance <= 7) {
+  if(distance <= 10) {
     Stop();
     digitalWrite(buzz, HIGH);
   }
@@ -108,7 +115,7 @@ void loop() {
       case '3': digitalWrite(buzz , HIGH); break;
       case '4': digitalWrite(buzz , LOW); break;
 
-      case 'D': if(is_working && distance > 5) Forward(); break;
+      case 'D': if(is_working && distance > 10) Forward(); break;
       case 'U': if(is_working) Backward(); break;
       case 'R': if(is_working) TurnRight(); break;
       case 'L': if(is_working) TurnLeft(); break;
